@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const apiKey = "12e094c1f64143ccbe4952b0e8b4b6ee";
-    const apiUrl = `https://newsapi.org/v2/top-headlines?country=ru&apiKey=${apiKey}`;
+    const apiKey = "12e094c1f64143ccbe4952b0e8b4b6ee";  // Замените на ваш API ключ
+    const apiUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
     const newsContainer = document.getElementById("news-container");
     const loader = document.getElementById("loader");
 
