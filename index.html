@@ -3,18 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Новости</title>
+    <title>News Feed</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <header>
-    <h1>Новости</h1>
-    <p>Актуальные новости c newsapi.org API</p>
+    <h1>Актуальные новости</h1>
+    <div id="date-time" class="date-time"></div>
 </header>
 
-<section id="news-container">
-    <div class="loader" id="loader">Загрузка...</div>
-</section>
+<div class="container">
+    <main>
+        <section id="news-us" class="news-column">
+            <h2>Американская лента новостей</h2>
+            <div id="news-container-us"></div>
+        </section>
+        <section id="news-ru" class="news-column">
+            <h2>Российская лента новостей</h2>
+            <div id="news-container-ru"></div>
+        </section>
+    </main>
+    <div id="loader" class="loader" style="display: none;">Loading...</div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Лента новостей. Все права не защищены очевидно.</p>
+</footer>
 
 <script src="js/scripts.js"></script>
 </body>

@@ -1,47 +1,66 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const apiUrl = 'https://gnews.io/api/v4/top-headlines?country=us&token=c80158c04c637b99e2bd02a7242b843c';
-    const newsContainer = document.getElementById("news-container");
-    const loader = document.getElementById("loader");
+const apiKey = 'c80158c04c637b99e2bd02a7242b843c';
 
-    const fetchNews = async () => {
-        loader.style.display = "block";
-        try {
-            const response = await fetch(apiUrl);
+function displayDateTime() {
+    const dateTimeElement = document.getElementById("date-time");
+    const now = new Date();
+    dateTimeElement.textContent = now.toLocaleString();
+}
+setInterval(displayDateTime, 1000);
 
-            if (!response.ok) {
-                throw new Error(`Ошибка HTTP: ${response.status}`);
-            }
+function displayNews(articles, containerId) {
+    const newsContainer = document.getElementById(containerId);
+    newsContainer.innerHTML = "";
 
-            const data = await response.json();
-            loader.style.display = "none";
+    if (articles.length === 0) {
+        newsContainer.innerHTML = "<p>No news articles found.</p>";
+        return;
+    }
 
-            if (data.articles && data.articles.length > 0) {
-                displayNews(data.articles);
-            } else {
-                newsContainer.innerHTML = "<p>Новости не найдены.</p>";
-            }
-        } catch (error) {
-            loader.style.display = "none";
-            newsContainer.innerHTML = `<p>Произошла ошибка при загрузке новостей: ${error.message}</p>`;
-            console.error("Ошибка:", error);
-        }
-    };
+    articles.forEach(article => {
+        const newsItem = document.createElement("div");
+        newsItem.classList.add("news-item");
+        newsItem.innerHTML = `
+            <h3>${article.title}</h3>
+            <p>${article.description || "No description available."}</p>
+            <a href="${article.url}" target="_blank">Read more</a>
+        `;
+        newsContainer.appendChild(newsItem);
+    });
+}
 
-    const displayNews = (articles) => {
-        newsContainer.innerHTML = "";
-        articles.forEach(article => {
-            const newsItem = document.createElement("div");
-            newsItem.classList.add("news-item");
+function fetchTopHeadlinesUS() {
+    const url = `https://gnews.io/api/v4/top-headlines?country=us&lang=en&max=10&apikey=${apiKey}`;
+    document.getElementById("loader").style.display = "block";
 
-            newsItem.innerHTML = `
-                <h3>${article.title}</h3>
-                <p>${article.description || "Описание недоступно."}</p>
-                <a href="${article.url}" target="_blank">Читать далее</a>
-            `;
-
-            newsContainer.appendChild(newsItem);
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("loader").style.display = "none";
+            displayNews(data.articles, "news-container-us");
+        })
+        .catch(error => {
+            document.getElementById("loader").style.display = "none";
+            console.error("Error fetching US news:", error);
         });
-    };
+}
 
-    fetchNews();
+function fetchTopHeadlinesRU() {
+    const url = `https://gnews.io/api/v4/top-headlines?country=ru&lang=ru&max=10&apikey=${apiKey}`;
+    document.getElementById("loader").style.display = "block";
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("loader").style.display = "none";
+            displayNews(data.articles, "news-container-ru");
+        })
+        .catch(error => {
+            document.getElementById("loader").style.display = "none";
+            console.error("Error fetching Russian news:", error);
+        });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetchTopHeadlinesUS();
+    fetchTopHeadlinesRU();
 });
