@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const apiUrl = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=12e094c1f64143ccbe4952b0e8b4b6ee';
+    const apiUrl = 'https://gnews.io/api/v4/top-headlines?country=us&token=c80158c04c637b99e2bd02a7242b843c';
     const newsContainer = document.getElementById("news-container");
     const loader = document.getElementById("loader");
 
@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const data = await response.json();
-
             loader.style.display = "none";
+
             if (data.articles && data.articles.length > 0) {
                 displayNews(data.articles);
             } else {
@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const displayNews = (articles) => {
+        newsContainer.innerHTML = "";
         articles.forEach(article => {
             const newsItem = document.createElement("div");
             newsItem.classList.add("news-item");
