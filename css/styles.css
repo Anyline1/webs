@@ -31,17 +31,31 @@ header {
     transition: background-color 0.3s ease;
 }
 
-header h1 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #1d1d1f;
-    margin: 5px 0;
+.header-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
 }
 
 .date-time {
     font-size: 14px;
     font-weight: 500;
     color: #6e6e73;
+}
+
+.weather-info {
+    font-size: 14px;
+    color: #6e6e73;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.weather-info img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
 }
 
 .container {
