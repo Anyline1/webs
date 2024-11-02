@@ -12,7 +12,7 @@ function displayNews(articles, containerId) {
     newsContainer.innerHTML = "";
 
     if (articles.length === 0) {
-        newsContainer.innerHTML = "<p>No news articles found.</p>";
+        newsContainer.innerHTML = "<p>Новостей не найдено.</p>";
         return;
     }
 
@@ -22,7 +22,7 @@ function displayNews(articles, containerId) {
         newsItem.innerHTML = `
             <h3>${article.title}</h3>
             <p>${article.description || "No description available."}</p>
-            <a href="${article.url}" target="_blank">Read more</a>
+            <a href="${article.url}" target="_blank">Узнать больше</a>
         `;
         newsContainer.appendChild(newsItem);
     });
