@@ -84,8 +84,13 @@ async function fetchWeather() {
     }
 }
 
+document.getElementById("back-to-top").addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     fetchWeather();
     fetchTopHeadlinesUS();
     fetchTopHeadlinesRU();
 });
+
