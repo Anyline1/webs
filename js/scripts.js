@@ -82,18 +82,35 @@ async function fetchWeather() {
         const data = await response.json();
 
         const temperature = `${Math.round(data.main.temp)}°C`;
+        const feelsLike = `Ощущается как: ${Math.round(data.main.feels_like)}°C`;
+        const tempMin = `Мин: ${Math.round(data.main.temp_min)}°C`;
+        const tempMax = `Макс: ${Math.round(data.main.temp_max)}°C`;
         const windSpeed = `Ветер: ${Math.round(data.wind.speed)} м/с`;
+        const pressure = `Давление: ${Math.round(data.main.pressure)} мм рт. ст.`;
+        const humidity = `Влажность: ${data.main.humidity}%`;
         const description = data.weather[0].description;
         const icon = data.weather[0].icon;
 
         weatherIconElement.src = `http://openweathermap.org/img/wn/${icon}@2x.png`;
         weatherIconElement.alt = description;
 
+        weatherDataElement.innerHTML = `
+            <div class="main-temperature">${temperature}</div>
+            <div class="temp-details">
+                <p>${feelsLike}</p>
+                <p>${tempMin}</p>
+                <p>${tempMax}</p>
+            </div>
+        `;
+
         let weatherIndex = 0;
-        const weatherInfoArray = [temperature, windSpeed, description];
+        const weatherInfoArray = [windSpeed, pressure, humidity, description];
+        const additionalInfoElement = document.createElement("div");
+        additionalInfoElement.classList.add("additional-weather-info");
+        weatherDataElement.appendChild(additionalInfoElement);
 
         setInterval(() => {
-            weatherDataElement.textContent = weatherInfoArray[weatherIndex];
+            additionalInfoElement.textContent = weatherInfoArray[weatherIndex];
             weatherIndex = (weatherIndex + 1) % weatherInfoArray.length;
         }, 3000);
     } catch (error) {
