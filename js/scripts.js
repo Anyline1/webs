@@ -1,11 +1,21 @@
 const apiKey = 'c80158c04c637b99e2bd02a7242b843c';
 
-function displayDateTime() {
-    const dateTimeElement = document.getElementById("date-time");
+function displayDate() {
+    const dateElement = document.getElementById("date");
     const now = new Date();
-    dateTimeElement.textContent = now.toLocaleString();
+    const options = { day: 'numeric', month: 'long' };
+    dateElement.textContent = now.toLocaleDateString('ru-RU', options).toUpperCase();
 }
-setInterval(displayDateTime, 1000);
+
+function displayTime() {
+    const timeElement = document.getElementById("time");
+    const now = new Date();
+    const timeOptions = { hour: '2-digit', minute: '2-digit' };
+    timeElement.textContent = now.toLocaleTimeString('ru-RU', timeOptions);
+}
+
+setInterval(displayTime, 1000);
+displayDate();
 
 function displayNews(articles, containerId) {
     const newsContainer = document.getElementById(containerId);
@@ -61,7 +71,8 @@ function fetchTopHeadlinesRU() {
 }
 
 async function fetchWeather() {
-    const weatherElement = document.getElementById("weather");
+    const weatherDataElement = document.getElementById("weather-data");
+    const weatherIconElement = document.getElementById("weather-icon");
     const apiKey = "25e38454a0f2af6bc314bc8b76dc55b1";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=Saint Petersburg&appid=${apiKey}&units=metric&lang=ru`;
 
@@ -70,17 +81,24 @@ async function fetchWeather() {
         if (!response.ok) throw new Error("Ошибка при получении данных о погоде");
         const data = await response.json();
 
-        const temperature = Math.round(data.main.temp);
+        const temperature = `${Math.round(data.main.temp)}°C`;
+        const windSpeed = `Ветер: ${Math.round(data.wind.speed)} м/с`;
         const description = data.weather[0].description;
         const icon = data.weather[0].icon;
 
-        weatherElement.innerHTML = `
-            <img src="http://openweathermap.org/img/wn/${icon}.png" alt="${description}">
-            ${temperature}°C, ${description}
-        `;
+        weatherIconElement.src = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+        weatherIconElement.alt = description;
+
+        let weatherIndex = 0;
+        const weatherInfoArray = [temperature, windSpeed, description];
+
+        setInterval(() => {
+            weatherDataElement.textContent = weatherInfoArray[weatherIndex];
+            weatherIndex = (weatherIndex + 1) % weatherInfoArray.length;
+        }, 3000);
     } catch (error) {
         console.error("Ошибка при получении погоды:", error);
-        weatherElement.textContent = "Не удалось загрузить погоду";
+        weatherDataElement.textContent = "Не удалось загрузить погоду";
     }
 }
 
@@ -93,4 +111,3 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchTopHeadlinesUS();
     fetchTopHeadlinesRU();
 });
-

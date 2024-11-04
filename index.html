@@ -9,10 +9,16 @@
 </head>
 <body>
 <header>
-    <h1>Актуальные новости</h1>
-    <div class="header-info">
-        <div id="date-time" class="date-time"></div>
-        <div id="weather" class="weather-info">Загрузка погоды...</div>
+    <div class="header-container">
+        <img src="assets/icon.webp" alt="Website Logo" class="logo">
+        <div class="header-info">
+            <div id="weather" class="weather-info">
+                <img id="weather-icon" class="weather-icon" src="" alt="Weather Icon">
+                <div id="weather-data" class="weather-data">Загрузка погоды...</div>
+            </div>
+            <div id="date" class="date"></div>
+            <div id="time" class="time"></div>
+        </div>
     </div>
 </header>
 
@@ -36,3 +42,4 @@
 <script src="js/scripts.js"></script>
 </body>
 </html>
+
