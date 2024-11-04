@@ -83,8 +83,8 @@ async function fetchWeather() {
 
         const temperature = `${Math.round(data.main.temp)}°C`;
         const feelsLike = `Ощущается как: ${Math.round(data.main.feels_like)}°C`;
-        const tempMin = `Мин: ${Math.round(data.main.temp_min)}°C`;
-        const tempMax = `Макс: ${Math.round(data.main.temp_max)}°C`;
+        const tempMin = `${Math.round(data.main.temp_min)}°C`;
+        const tempMax = `${Math.round(data.main.temp_max)}°C`;
         const windSpeed = `Ветер: ${Math.round(data.wind.speed)} м/с`;
         const pressure = `Давление: ${Math.round(data.main.pressure)} мм рт. ст.`;
         const humidity = `Влажность: ${data.main.humidity}%`;
@@ -95,19 +95,21 @@ async function fetchWeather() {
         weatherIconElement.alt = description;
 
         weatherDataElement.innerHTML = `
-            <div class="main-temperature">${temperature}</div>
-            <div class="temp-details">
-                <p>${feelsLike}</p>
-                <p>${tempMin}</p>
-                <p>${tempMax}</p>
+            <div class="main-weather">
+                <div class="temp-details">
+                    <p class="main-temperature">${temperature}</p>
+                    <div class="min-max">
+                        <p>Мин: ${tempMin}</p>
+                        <p>Макс: ${tempMax}</p>
+                    </div>
+                    <p class="feels-like">${feelsLike}</p>
+                </div>
             </div>
         `;
 
         let weatherIndex = 0;
         const weatherInfoArray = [windSpeed, pressure, humidity, description];
-        const additionalInfoElement = document.createElement("div");
-        additionalInfoElement.classList.add("additional-weather-info");
-        weatherDataElement.appendChild(additionalInfoElement);
+        const additionalInfoElement = document.getElementById("additional-weather-info");
 
         setInterval(() => {
             additionalInfoElement.textContent = weatherInfoArray[weatherIndex];
