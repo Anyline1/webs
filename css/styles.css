@@ -282,3 +282,36 @@ footer #back-to-top {
     font-size: 12px;
     cursor: pointer;
 }
+
+.dark-theme {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-theme header {
+    background-color: #333333cc;
+    color: #ffffff;
+}
+
+.dark-theme .news-item {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+.dark-theme footer {
+    background-color: #1e1e1e;
+    color: #999999;
+}
+
+.dark-theme .news-item a {
+    color: #bb86fc;
+}
+
+.dark-theme .news-item a:hover {
+    color: #ff79c6;
+}
+
+.dark-theme #theme-toggle {
+    background-color: #bb86fc;
+    color: #ffffff;
+}
