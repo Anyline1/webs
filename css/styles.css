@@ -283,35 +283,57 @@ footer #back-to-top {
     cursor: pointer;
 }
 
-.dark-theme {
-    background-color: #121212;
-    color: #e0e0e0;
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #FFD700;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.4s, transform 0.3s;
 }
 
-.dark-theme header {
-    background-color: #333333cc;
-    color: #ffffff;
+.theme-toggle .sun,
+.theme-toggle .moon {
+    font-size: 24px;
+    color: #333;
+    transition: opacity 0.4s;
 }
 
-.dark-theme .news-item {
+.theme-toggle .sun {
+    content: "☀️"; /* Иконка солнца */
+    opacity: 1;
+}
+
+.theme-toggle .moon {
+    content: "🌙"; /* Иконка луны */
+    position: absolute;
+    opacity: 0;
+}
+
+.theme-toggle.night .sun {
+    opacity: 0;
+}
+
+.theme-toggle.night .moon {
+    opacity: 1;
+}
+
+body.night {
     background-color: #1e1e1e;
-    color: #e0e0e0;
+    color: #f5f5f5;
 }
 
-.dark-theme footer {
-    background-color: #1e1e1e;
-    color: #999999;
+body.night header,
+body.night footer {
+    background-color: #333;
+    color: #f5f5f5;
 }
 
-.dark-theme .news-item a {
-    color: #bb86fc;
-}
-
-.dark-theme .news-item a:hover {
-    color: #ff79c6;
-}
-
-.dark-theme #theme-toggle {
-    background-color: #bb86fc;
-    color: #ffffff;
-}
