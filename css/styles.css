@@ -20,7 +20,7 @@ header {
     background: #ffffffcc;
     backdrop-filter: blur(10px);
     color: #333;
-    padding: 10px 20px;
+    padding: 5px 20px;
     position: fixed;
     top: 0;
     left: 0;
@@ -36,20 +36,19 @@ header {
     max-width: 1200px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
 }
 
 .logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 35px;
+    height: 35px;
 }
 
 .header-info {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     margin-left: auto;
 }
 
@@ -85,7 +84,7 @@ header {
 }
 
 .date, .time {
-    font-size: 14px;
+    font-size: 12px;
     color: #6e6e73;
     font-weight: 500;
 }
@@ -284,46 +283,44 @@ footer #back-to-top {
 }
 
 .theme-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     background-color: #FFD700;
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.4s, transform 0.3s;
+    margin-right: 10px;
 }
 
 .theme-toggle .sun,
 .theme-toggle .moon {
-    font-size: 24px;
+    font-size: 16px;
     color: #333;
-    transition: opacity 0.4s;
 }
 
-.theme-toggle .sun {
-    content: "☀️"; /* Иконка солнца */
+.theme-toggle.day .sun {
+    opacity: 0;
+}
+
+.theme-toggle.day .moon {
     opacity: 1;
 }
 
-.theme-toggle .moon {
-    content: "🌙"; /* Иконка луны */
-    position: absolute;
+.theme-toggle.night .moon {
     opacity: 0;
 }
 
 .theme-toggle.night .sun {
-    opacity: 0;
+    opacity: 1;
 }
 
-.theme-toggle.night .moon {
-    opacity: 1;
+.theme-toggle.night {
+    background-color: #1e1e1e;
 }
 
 body.night {
@@ -337,3 +334,49 @@ body.night footer {
     color: #f5f5f5;
 }
 
+.news-search {
+    margin-left: auto;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.news-search:focus {
+    border-color: #0071e3;
+}
+
+.new-article-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffd700;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    font-size: 14px;
+    animation: fadeInOut 5s ease;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(20px); }
+    20%, 80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+}
+
+.weather-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
