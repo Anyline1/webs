@@ -308,12 +308,12 @@ footer #back-to-top {
 }
 
 .theme-toggle .sun {
-    content: "☀️"; /* Иконка солнца */
+    content: "☀️";
     opacity: 1;
 }
 
 .theme-toggle .moon {
-    content: "🌙"; /* Иконка луны */
+    content: "🌙";
     position: absolute;
     opacity: 0;
 }
@@ -336,4 +336,39 @@ body.night footer {
     background-color: #333;
     color: #f5f5f5;
 }
+
+.news-search {
+    margin-left: auto;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.news-search:focus {
+    border-color: #0071e3;
+}
+
+.new-article-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffd700;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    font-size: 14px;
+    animation: fadeInOut 5s ease;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(20px); }
+    20%, 80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+}
+
 
