@@ -1,8 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const welcomeMessage = "Добро пожаловать на сайт новостей!";
-    alert(welcomeMessage);
-});
-
 function addSearchFeature() {
     const searchInput = document.createElement("input");
     searchInput.type = "text";
@@ -59,5 +54,5 @@ function notifyNewArticle() {
 
 document.addEventListener("DOMContentLoaded", function () {
     addSearchFeature();
-    setInterval(checkForNewArticles, 30000); // Проверяем каждые 30 секунд
+    setInterval(checkForNewArticles, 30000);
 });
