@@ -30,6 +30,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: transform 0.3s ease;
 }
 
 .header-container {
@@ -118,6 +119,10 @@ header {
     transition: all 0.3s ease;
 }
 
+header.hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
 .news-search {
     padding: 8px 15px;
     font-size: 14px;
