@@ -10,24 +10,33 @@
 <body>
 <header>
     <div class="header-container">
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
-            <span class="sun">☀️</span>
-            <span class="moon">🌙</span>
-        </button>
         <img src="assets/icon.webp" alt="Website Logo" class="logo">
-        <div class="header-info">
-
-            <div id="date" class="date"></div>
-            <div id="time" class="time"></div>
-        </div>
+        <nav class="menu">
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle Menu">≡</button>
+            <div class="menu-dropdown">
+                <div class="menu-weather">
+                    <div id="weather" class="weather-info">
+                        <div id="weather-data" class="weather-data">Загрузка погоды...</div>
+                        <img id="weather-icon" class="weather-icon" src="" alt="Weather Icon">
+                    </div>
+                </div>
+                <div class="menu-search">
+                    <input type="text" id="search-input" placeholder="Поиск...">
+                    <button id="search-button">Найти</button>
+                </div>
+                <div class="menu-date-time">
+                    <div id="date" class="date"></div>
+                    <div id="time" class="time"></div>
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+                    <span class="sun">☀️</span>
+                    <span class="moon">🌙</span>
+                </button>
+            </div>
+        </nav>
     </div>
 </header>
-<section class="weather-section">
-    <div id="weather" class="weather-info">
-        <div id="weather-data" class="weather-data">Загрузка погоды...</div>
-        <img id="weather-icon" class="weather-icon" src="" alt="Weather Icon">
-    </div>
-</section>
+
 <div class="container">
     <main>
         <section id="news-us" class="news-column">
