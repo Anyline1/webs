@@ -118,6 +118,28 @@ header {
     transition: all 0.3s ease;
 }
 
+.news-search {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 20px; /
+    border: 1px solid #ddd;
+    outline: none;
+    transition: border-color 0.3s ease;
+    max-width: 250px;
+    width: 100%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.news-search:focus {
+    border-color: #0071e3;
+}
+
+.menu {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 main {
     display: flex;
     gap: 20px;
