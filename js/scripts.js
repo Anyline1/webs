@@ -31,7 +31,7 @@ function displayNews(articles, containerId) {
         newsItem.classList.add("news-item");
         newsItem.innerHTML = `
             <h3>${article.title}</h3>
-            <p>${article.description || "No description available."}</p>
+            <p>${article.description || "Описание не доступно."}</p>
             <a href="${article.url}" target="_blank">Узнать больше</a>
         `;
         newsContainer.appendChild(newsItem);
