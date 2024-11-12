@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/image.webp" type="image/png" sizes="32x32">
     <title>Лента новостей</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/head.css">
+    <link rel="stylesheet" href="css/body.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
 <header>
@@ -35,16 +39,18 @@
 
 <div class="container">
     <main>
-        <section id="news-us" class="news-column">
-            <h2>Американские новости</h2>
-            <div id="news-container-us"></div>
-        </section>
-        <section id="news-ru" class="news-column">
-            <h2>Российские новости</h2>
-            <div id="news-container-ru"></div>
-        </section>
+        <div class="masonry-grid">
+            <section class="news-item" id="news-us">
+                <h2>Американские новости</h2>
+                <div id="news-container-us"></div>
+            </section>
+            <section class="news-item" id="news-ru">
+                <h2>Российские новости</h2>
+                <div id="news-container-ru"></div>
+            </section>
+        </div>
     </main>
-    <div id="loader" class="loader" style="display: none;">Загрузка...</div>
+    <div id="loader" class="loader">Загрузка...</div>
 </div>
 
 <footer>
