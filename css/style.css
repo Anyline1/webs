@@ -1,4 +1,4 @@
-
+/* Reset and basic styles */
 * {
     margin: 0;
     padding: 0;
@@ -11,6 +11,7 @@ body {
     color: #333;
 }
 
+/* Header Styles */
 header {
     background-color: #d1e9ff;
     padding: 10px 20px;
@@ -32,12 +33,14 @@ header {
     font-size: 16px;
 }
 
+/* Main Content Container */
 .container {
     max-width: 1200px;
     margin: 20px auto;
     padding: 0 20px;
 }
 
+/* Weather Block Styles */
 .weather-block {
     background-color: #d1e9ff;
     padding: 20px;
@@ -66,24 +69,35 @@ header {
     color: #555;
 }
 
+/* News Item Styles */
 .news-item {
     display: block;
-    padding: 15px;
+    padding: 20px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 12px; /* More rounded corners for the cloud effect */
     margin-bottom: 15px;
+    background-color: #ffffff; /* White background for the cloud effect */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a "cloud" effect */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
     text-decoration: none;
     color: inherit;
-    transition: background-color 0.3s ease;
 }
 
 .news-item:hover {
-    background-color: #f0f8ff;
+    background-color: #f0f8ff; /* Light blue on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
+.news-item a {
+    text-decoration: none; /* Remove default link styling */
+    color: inherit;
+}
+
+/* News Content Styles */
 .news-content h3 {
     margin: 0;
     font-size: 1.2em;
+    font-weight: bold;
 }
 
 .news-content p {
@@ -92,6 +106,7 @@ header {
     color: #555;
 }
 
+/* Footer Styles */
 footer {
     text-align: center;
     padding: 20px;
