@@ -11,7 +11,9 @@
 <header>
     <div class="header-container">
         <img src="assets/icon.webp" alt="Website Logo" class="logo">
+
         <input type="text" placeholder="Поиск новостей..." class="search-input">
+
     </div>
 </header>
 
@@ -19,8 +21,11 @@
     <section class="weather-block">
         <div class="weather-info">
             <div id="weather-data" class="weather-data">Загрузка погоды...</div>
+
             <img id="weather-icon" class="weather-icon" src="" alt="Weather Icon">
         </div>
+        <div id="additional-weather-info" class="additional-info"></div>
+
         <div class="date-time">
             <div id="date" class="date"></div>
             <div id="time" class="time"></div>
@@ -45,5 +50,6 @@
 </footer>
 
 <script src="js/scripts.js"></script>
+<script src="js/search.js"></script>
 </body>
 </html>
