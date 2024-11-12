@@ -27,46 +27,38 @@ function displayNews(articles, containerId) {
     }
 
     articles.forEach(article => {
-        const newsItem = document.createElement("div");
+        const newsItem = document.createElement("a");
         newsItem.classList.add("news-item");
+        newsItem.href = article.url;
+        newsItem.target = "_blank";
         newsItem.innerHTML = `
-            <h3>${article.title}</h3>
-            <p>${article.description || "Описание не доступно."}</p>
-            <a href="${article.url}" target="_blank">Узнать больше</a>
+            <div class="news-content">
+                <h3>${article.title}</h3>
+                <p>${article.description || "Описание не доступно."}</p>
+            </div>
         `;
         newsContainer.appendChild(newsItem);
     });
 }
 
-function fetchTopHeadlinesUS() {
-    const url = `https://gnews.io/api/v4/top-headlines?country=us&lang=en&max=10&apikey=${apiKey}`;
-    document.getElementById("loader").style.display = "block";
+function fetchTopHeadlines(country, containerId) {
+    const url = `https://gnews.io/api/v4/top-headlines?country=${country}&lang=${country === 'us' ? 'en' : 'ru'}&max=10&apikey=${apiKey}`;
+    const loader = document.getElementById("loader");
+
+    // Show loader if it exists
+    if (loader) loader.style.display = "block";
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            document.getElementById("loader").style.display = "none";
-            displayNews(data.articles, "news-container-us");
+            // Hide loader if it exists
+            if (loader) loader.style.display = "none";
+            displayNews(data.articles, containerId);
         })
         .catch(error => {
-            document.getElementById("loader").style.display = "none";
-            console.error("Error fetching US news:", error);
-        });
-}
-
-function fetchTopHeadlinesRU() {
-    const url = `https://gnews.io/api/v4/top-headlines?country=ru&lang=ru&max=10&apikey=${apiKey}`;
-    document.getElementById("loader").style.display = "block";
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("loader").style.display = "none";
-            displayNews(data.articles, "news-container-ru");
-        })
-        .catch(error => {
-            document.getElementById("loader").style.display = "none";
-            console.error("Error fetching Russian news:", error);
+            // Hide loader if it exists
+            if (loader) loader.style.display = "none";
+            console.error(`Error fetching ${country.toUpperCase()} news:`, error);
         });
 }
 
@@ -107,8 +99,8 @@ async function fetchWeather() {
             </div>
         `;
 
-        let weatherIndex = 0;
         const weatherInfoArray = [windSpeed, pressure, humidity, description];
+        let weatherIndex = 0;
         const additionalInfoElement = document.getElementById("additional-weather-info");
 
         setInterval(() => {
@@ -127,6 +119,6 @@ document.getElementById("back-to-top").addEventListener("click", () => {
 
 document.addEventListener("DOMContentLoaded", function () {
     fetchWeather();
-    fetchTopHeadlinesUS();
-    fetchTopHeadlinesRU();
+    fetchTopHeadlines('us', 'news-container-us');
+    fetchTopHeadlines('ru', 'news-container-ru');
 });

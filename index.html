@@ -5,59 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/image.webp" type="image/png" sizes="32x32">
     <title>Лента новостей</title>
-    <link rel="stylesheet" href="css/head.css">
-    <link rel="stylesheet" href="css/body.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <header>
     <div class="header-container">
         <img src="assets/icon.webp" alt="Website Logo" class="logo">
-        <nav class="menu">
-            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle Menu">≡</button>
-            <div class="menu-dropdown">
-                <div class="menu-weather">
-                    <div id="weather" class="weather-info">
-                        <div id="weather-data" class="weather-data">Загрузка погоды...</div>
-                        <img id="weather-icon" class="weather-icon" src="" alt="Weather Icon">
-                    </div>
-                </div>
-                <div class="menu-date-time">
-                    <div id="date" class="date"></div>
-                    <div id="time" class="time"></div>
-                </div>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
-                    <span class="sun">☀️</span>
-                    <span class="moon">🌙</span>
-                </button>
-            </div>
-        </nav>
+        <input type="text" placeholder="Поиск новостей..." class="search-input">
     </div>
 </header>
 
 <div class="container">
+    <section class="weather-block">
+        <div class="weather-info">
+            <div id="weather-data" class="weather-data">Загрузка погоды...</div>
+            <img id="weather-icon" class="weather-icon" src="" alt="Weather Icon">
+        </div>
+        <div class="date-time">
+            <div id="date" class="date"></div>
+            <div id="time" class="time"></div>
+        </div>
+    </section>
     <main>
-        <div class="masonry-grid">
-            <section class="news-item" id="news-us">
+        <div class="news-grid">
+            <section class="news-category" id="news-us">
                 <h2>Американские новости</h2>
-                <div id="news-container-us"></div>
+                <div id="news-container-us" class="news-items"></div>
             </section>
-            <section class="news-item" id="news-ru">
+            <section class="news-category" id="news-ru">
                 <h2>Российские новости</h2>
-                <div id="news-container-ru"></div>
+                <div id="news-container-ru" class="news-items"></div>
             </section>
         </div>
     </main>
-    <div id="loader" class="loader">Загрузка...</div>
 </div>
 
 <footer>
     <p>© 2024 Webs. Все права не защищены очевидно. | GitHub: <a href="https://github.com/anyline1" target="_blank">Anyline1</a> | <button id="back-to-top">Наверх</button></p>
 </footer>
+
 <script src="js/scripts.js"></script>
-<script src="js/button.js"></script>
-<script src="js/search.js"></script>
 </body>
 </html>
