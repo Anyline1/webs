@@ -27,52 +27,44 @@ function displayNews(articles, containerId) {
     }
 
     articles.forEach(article => {
-        const newsItem = document.createElement("div");
+        const newsItem = document.createElement("a");
         newsItem.classList.add("news-item");
+        newsItem.href = article.url;
+        newsItem.target = "_blank";
         newsItem.innerHTML = `
-            <h3>${article.title}</h3>
-            <p>${article.description || "Описание не доступно."}</p>
-            <a href="${article.url}" target="_blank">Узнать больше</a>
+            <div class="news-content">
+                <h3>${article.title}</h3>
+                <p>${article.description || "Описание не доступно."}</p>
+            </div>
         `;
         newsContainer.appendChild(newsItem);
     });
 }
 
-function fetchTopHeadlinesUS() {
-    const url = `https://gnews.io/api/v4/top-headlines?country=us&lang=en&max=10&apikey=${apiKey}`;
-    document.getElementById("loader").style.display = "block";
+function fetchTopHeadlines(country, containerId) {
+    const url = `https://gnews.io/api/v4/top-headlines?country=${country}&lang=${country === 'us' ? 'en' : 'ru'}&max=10&apikey=${apiKey}`;
+    const loader = document.getElementById("loader");
+
+    if (loader) loader.style.display = "block";
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            document.getElementById("loader").style.display = "none";
-            displayNews(data.articles, "news-container-us");
+            // Hide loader if it exists
+            if (loader) loader.style.display = "none";
+            displayNews(data.articles, containerId);
         })
         .catch(error => {
-            document.getElementById("loader").style.display = "none";
-            console.error("Error fetching US news:", error);
-        });
-}
-
-function fetchTopHeadlinesRU() {
-    const url = `https://gnews.io/api/v4/top-headlines?country=ru&lang=ru&max=10&apikey=${apiKey}`;
-    document.getElementById("loader").style.display = "block";
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("loader").style.display = "none";
-            displayNews(data.articles, "news-container-ru");
-        })
-        .catch(error => {
-            document.getElementById("loader").style.display = "none";
-            console.error("Error fetching Russian news:", error);
+            // Hide loader if it exists
+            if (loader) loader.style.display = "none";
+            console.error(`Error fetching ${country.toUpperCase()} news:`, error);
         });
 }
 
 async function fetchWeather() {
     const weatherDataElement = document.getElementById("weather-data");
     const weatherIconElement = document.getElementById("weather-icon");
+    const additionalInfoElement = document.getElementById("additional-weather-info"); // New element for rotating info
     const apiKey = "25e38454a0f2af6bc314bc8b76dc55b1";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=Saint Petersburg&appid=${apiKey}&units=metric&lang=ru`;
 
@@ -85,14 +77,18 @@ async function fetchWeather() {
         const feelsLike = `Ощущается как: ${Math.round(data.main.feels_like)}°C`;
         const tempMin = `${Math.round(data.main.temp_min)}°C`;
         const tempMax = `${Math.round(data.main.temp_max)}°C`;
-        const windSpeed = `Ветер: ${Math.round(data.wind.speed)} м/с`;
-        const pressure = `Давление: ${Math.round(data.main.pressure)} мм рт. ст.`;
-        const humidity = `Влажность: ${data.main.humidity}%`;
-        const description = data.weather[0].description;
-        const icon = data.weather[0].icon;
 
-        weatherIconElement.src = `http://openweathermap.org/img/wn/${icon}@2x.png`;
-        weatherIconElement.alt = description;
+        const weatherInfoArray = [
+            `Ветер: ${Math.round(data.wind.speed)} м/с`,
+            `Давление: ${Math.round(data.main.pressure)} мм рт. ст.`,
+            `Влажность: ${data.main.humidity}%`,
+            `${data.weather[0].description}`
+        ];
+
+        let weatherIndex = 0;
+
+        weatherIconElement.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+        weatherIconElement.alt = data.weather[0].description;
 
         weatherDataElement.innerHTML = `
             <div class="main-weather">
@@ -105,16 +101,14 @@ async function fetchWeather() {
                     <p class="feels-like">${feelsLike}</p>
                 </div>
             </div>
+            <div id="additional-weather-info" class="additional-info"></div>
         `;
 
-        let weatherIndex = 0;
-        const weatherInfoArray = [windSpeed, pressure, humidity, description];
-        const additionalInfoElement = document.getElementById("additional-weather-info");
-
         setInterval(() => {
-            additionalInfoElement.textContent = weatherInfoArray[weatherIndex];
             weatherIndex = (weatherIndex + 1) % weatherInfoArray.length;
+            additionalInfoElement.textContent = weatherInfoArray[weatherIndex];
         }, 3000);
+
     } catch (error) {
         console.error("Ошибка при получении погоды:", error);
         weatherDataElement.textContent = "Не удалось загрузить погоду";
@@ -127,6 +121,6 @@ document.getElementById("back-to-top").addEventListener("click", () => {
 
 document.addEventListener("DOMContentLoaded", function () {
     fetchWeather();
-    fetchTopHeadlinesUS();
-    fetchTopHeadlinesRU();
+    fetchTopHeadlines('us', 'news-container-us');
+    fetchTopHeadlines('ru', 'news-container-ru');
 });
