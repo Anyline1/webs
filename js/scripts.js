@@ -65,6 +65,7 @@ function fetchTopHeadlines(country, containerId) {
 async function fetchWeather() {
     const weatherDataElement = document.getElementById("weather-data");
     const weatherIconElement = document.getElementById("weather-icon");
+    const additionalInfoElement = document.getElementById("additional-weather-info");
     const apiKey = "25e38454a0f2af6bc314bc8b76dc55b1";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=Saint Petersburg&appid=${apiKey}&units=metric&lang=ru`;
 
