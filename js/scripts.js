@@ -50,12 +50,10 @@ function fetchTopHeadlines(country, containerId) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // Hide loader if it exists
             if (loader) loader.style.display = "none";
             displayNews(data.articles, containerId);
         })
         .catch(error => {
-            // Hide loader if it exists
             if (loader) loader.style.display = "none";
             console.error(`Error fetching ${country.toUpperCase()} news:`, error);
         });
