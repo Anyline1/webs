@@ -170,6 +170,38 @@ header {
     color: #666;
 }
 
+.crypto-block {
+    width: 100%;
+    background-color: #d1e9ff;
+    color: #333;
+    padding: 10px 0;
+    border: 1px solid #bcd4f0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.crypto-ticker {
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+}
+
+.crypto-marquee {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll-linear 30s linear infinite;
+    font-size: 16px;
+}
+
+@keyframes scroll-linear {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
 footer {
     text-align: center;
     padding: 20px;
