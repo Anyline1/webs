@@ -170,6 +170,24 @@ header {
     color: #666;
 }
 
+.crypto-ticker {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.crypto-marquee {
+    display: inline-block;
+    animation: scroll 15s linear infinite;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
 footer {
     text-align: center;
     padding: 20px;
