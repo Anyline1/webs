@@ -121,4 +121,21 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchWeather();
     fetchTopHeadlines('us', 'news-container-us');
     fetchTopHeadlines('ru', 'news-container-ru');
+
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const newsItems = document.querySelectorAll('.news-items');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const tab = button.getAttribute('data-tab');
+            newsItems.forEach(item => {
+                item.classList.toggle('active', item.id === `news-container-${tab}`);
+            });
+        });
+    });
+
+    document.querySelector('.tab-button[data-tab="ru"]').click();
 });
