@@ -170,12 +170,52 @@ header {
 
 .news-items {
     display: none;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .news-items.active {
     display: flex;
+}
+
+.news-item {
+    display: block;
+    text-decoration: none;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: #333;
+    overflow: hidden;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.news-item .news-content {
+    display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+}
+
+.news-item h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #1a73e8;
+}
+
+.news-item p {
+    margin: 0;
+    font-size: 0.95em;
+    color: #666;
+}
+
+.news-item:hover h3 {
+    color: #0056b3;
 }
 
 .crypto-block {

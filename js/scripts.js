@@ -34,7 +34,7 @@ function displayNews(articles, containerId) {
         newsItem.innerHTML = `
             <div class="news-content">
                 <h3>${article.title}</h3>
-                <p>${article.description || "Описание не доступно."}</p>
+                <p>${article.description ? article.description.slice(0, 150) + '...' : "Описание не доступно."}</p>
             </div>
         `;
         newsContainer.appendChild(newsItem);
@@ -62,7 +62,7 @@ function fetchTopHeadlines(country, containerId) {
 async function fetchWeather() {
     const weatherDataElement = document.getElementById("weather-data");
     const weatherIconElement = document.getElementById("weather-icon");
-    const additionalInfoElement = document.getElementById("additional-weather-info"); // New element for rotating info
+    const additionalInfoElement = document.getElementById("additional-weather-info");
     const apiKey = "25e38454a0f2af6bc314bc8b76dc55b1";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=Saint Petersburg&appid=${apiKey}&units=metric&lang=ru`;
 
