@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/image.webp" type="image/png" sizes="32x32">
     <title>Лента новостей</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" id="theme-style">
+    <link rel="stylesheet" href="css/currency.css">
 </head>
 <body>
 <header>
     <div class="header-container">
+        <div id="currency-rates" class="currency-rates">
+            <div id="usd-rate" class="currency-item">USD: загрузка...</div>
+            <div id="eur-rate" class="currency-item">EUR: загрузка...</div>
+            <div id="cny-rate" class="currency-item">CNY: загрузка...</div>
+        </div>
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
-            <span class="sun">☀️</span>
             <span class="moon">🌙</span>
         </button>
     </div>
@@ -36,13 +41,19 @@
         </div>
     </section>
     <main>
-        <div class="news-grid">
-            <div id="news-container-us" class="news-items"></div>
-            <div id="news-container-ru" class="news-items"></div>
+        <div class="news-tabs">
+            <div class="tabs-header">
+                <button class="tab-button" data-tab="ru">RU</button>
+                <button class="tab-button" data-tab="us">US</button>
+            </div>
+            <div class="tabs-content">
+                <div id="news-container-ru" class="news-items"></div>
+                <div id="news-container-us" class="news-items"></div>
+            </div>
         </div>
     </main>
-</div>
 
+</div>
 <footer>
     <p>© 2024 Webs. Все права не защищены очевидно. | GitHub: <a href="https://github.com/anyline1" target="_blank">.Anyline1</a> | <button id="back-to-top">Наверх</button></p>
 </footer>
@@ -50,5 +61,6 @@
 <script src="js/search.js"></script>
 <script src="js/button.js"></script>
 <script src="js/crypto.js"></script>
+<script src="js/currency.js"></script>
 </body>
 </html>
