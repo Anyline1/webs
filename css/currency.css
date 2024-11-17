@@ -18,8 +18,8 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
-    width: 200px; /* Фиксированная ширина для удобства анимации */
-    height: 30px; /* Задаем высоту элемента */
+    width: 200px;
+    height: 30px;
 }
 
 .currency-item {
