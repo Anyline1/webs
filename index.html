@@ -7,6 +7,7 @@
     <title>Лента новостей</title>
     <link rel="stylesheet" href="css/style.css" id="theme-style">
     <link rel="stylesheet" href="css/currency.css">
+    <link rel="stylesheet" href="css/search.css">
 </head>
 <body>
 <header>
@@ -22,6 +23,12 @@
     </div>
 </header>
 <div class="container">
+    <section class="search-block">
+        <form class="news-search" action="#" method="GET">
+            <input type="text" name="query" placeholder="Введите текст для поиска...">
+            <button type="submit" class="search-button">Найти</button>
+        </form>
+    </section>
     <section class="weather-block">
         <div class="weather-info">
             <div id="weather-data" class="weather-data">Загрузка погоды...</div>
@@ -52,7 +59,6 @@
             </div>
         </div>
     </main>
-
 </div>
 <footer>
     <p>© 2024 Webs. Все права не защищены очевидно. | GitHub: <a href="https://github.com/anyline1" target="_blank">.Anyline1</a> | <button id="back-to-top">Наверх</button></p>

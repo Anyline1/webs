@@ -1,58 +1,43 @@
-function addSearchFeature() {
-    const searchInput = document.createElement("input");
-    searchInput.type = "text";
-    searchInput.placeholder = "Поиск новостей...";
-    searchInput.classList.add("news-search");
-    searchInput.addEventListener("input", filterNews);
+document.addEventListener('DOMContentLoaded', () => {
+    const searchForm = document.querySelector('.news-search');
+    const searchInput = searchForm.querySelector('input[name="query"]');
+    const newsContainers = document.querySelectorAll('.news-items');
 
-    const header = document.querySelector("header");
-    header.appendChild(searchInput);
-}
+    searchForm.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-function filterNews(event) {
-    const searchTerm = event.target.value.toLowerCase();
-    const newsItems = document.querySelectorAll(".news-item");
+        const query = searchInput.value.trim().toLowerCase();
 
-    newsItems.forEach(item => {
-        const title = item.querySelector("h3").textContent.toLowerCase();
-        const description = item.querySelector("p").textContent.toLowerCase();
-        if (title.includes(searchTerm) || description.includes(searchTerm)) {
-            item.style.display = "";
-        } else {
-            item.style.display = "none";
+        if (!query) {
+            newsContainers.forEach(container => {
+                const newsItems = container.querySelectorAll('.news-item');
+                newsItems.forEach(item => {
+                    item.style.display = 'block';
+                });
+            });
+            return;
+        }
+
+        let resultsFound = false;
+
+        newsContainers.forEach(container => {
+            const newsItems = container.querySelectorAll('.news-item');
+
+            newsItems.forEach(item => {
+                const title = item.querySelector('h3').textContent.toLowerCase();
+                const description = item.querySelector('p').textContent.toLowerCase();
+
+                if (title.includes(query) || description.includes(query)) {
+                    item.style.display = 'block';
+                    resultsFound = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        if (!resultsFound) {
+            alert('Результаты поиска не найдены.');
         }
     });
-}
-
-let latestArticleTimestamp = Date.now();
-
-function checkForNewArticles() {
-    const newsContainers = ["news-container-us", "news-container-ru"];
-    newsContainers.forEach(containerId => {
-        const container = document.getElementById(containerId);
-        if (container && container.childNodes.length > 0) {
-            const article = container.childNodes[0];
-            const articleTime = new Date(article.getAttribute("data-timestamp")).getTime();
-            if (articleTime > latestArticleTimestamp) {
-                latestArticleTimestamp = articleTime;
-                notifyNewArticle();
-            }
-        }
-    });
-}
-
-function notifyNewArticle() {
-    const notification = document.createElement("div");
-    notification.classList.add("new-article-notification");
-    notification.textContent = "Появились новые новости!";
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        notification.remove();
-    }, 5000);
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    addSearchFeature();
-    setInterval(checkForNewArticles, 30000);
 });

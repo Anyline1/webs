@@ -20,6 +20,26 @@ async function fetchCurrencyRates() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    fetchCurrencyRates();
+document.addEventListener("DOMContentLoaded", async function () {
+    const currencyItems = document.querySelectorAll(".currency-item");
+    let activeIndex = 0;
+
+    await fetchCurrencyRates();
+
+    function switchCurrency() {
+        if (currencyItems.length === 0) return;
+
+        currencyItems[activeIndex].classList.remove("active");
+
+        activeIndex = (activeIndex + 1) % currencyItems.length;
+
+        currencyItems[activeIndex].classList.add("active");
+    }
+
+    if (currencyItems.length > 0) {
+        currencyItems[0].classList.add("active");
+    }
+
+    setInterval(switchCurrency, 3000);
 });
+
