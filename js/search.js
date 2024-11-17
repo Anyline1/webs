@@ -7,8 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         const query = searchInput.value.trim().toLowerCase();
+
         if (!query) {
-            alert('Введите текст для поиска!');
+            newsContainers.forEach(container => {
+                const newsItems = container.querySelectorAll('.news-item');
+                newsItems.forEach(item => {
+                    item.style.display = 'block';
+                });
+            });
             return;
         }
 
