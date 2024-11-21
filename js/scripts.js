@@ -61,57 +61,50 @@ function fetchTopHeadlines(country, containerId) {
 
 async function fetchWeather() {
     const weatherDataElement = document.getElementById("weather-data");
-    const weatherIconElement = document.getElementById("weather-icon");
     const additionalInfoElement = document.getElementById("additional-weather-info");
-    const apiKey = "25e38454a0f2af6bc314bc8b76dc55b1";
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=Saint Petersburg&appid=${apiKey}&units=metric&lang=ru`;
+    const latitude = 59.935894;
+    const longitude = 30.338745;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&temperature_unit=celsius&windspeed_unit=ms&timezone=auto`;
 
     try {
         const response = await fetch(url);
         if (!response.ok) throw new Error("Ошибка при получении данных о погоде");
         const data = await response.json();
 
-        const temperature = `${Math.round(data.main.temp)}°C`;
-        const feelsLike = `Ощущается как: ${Math.round(data.main.feels_like)}°C`;
-        const tempMin = `${Math.round(data.main.temp_min)}°C`;
-        const tempMax = `${Math.round(data.main.temp_max)}°C`;
+        const temperature = `${Math.round(data.current_weather.temperature)}°C`;
+        const windSpeed = `Ветер: ${Math.round(data.current_weather.windspeed)} м/с`;
+        const windDirection = `Направление ветра: ${data.current_weather.winddirection}°`;
+        const isDay = data.current_weather.is_day === 1;
+        const weatherIcon = isDay ? "☀️" : "🌙";
 
-        const weatherInfoArray = [
-            `Ветер: ${Math.round(data.wind.speed)} м/с`,
-            `Давление: ${Math.round(data.main.pressure)} мм рт. ст.`,
-            `Влажность: ${data.main.humidity}%`,
-            `${data.weather[0].description}`
-        ];
+        const weatherInfoArray = [windSpeed, windDirection];
 
         let weatherIndex = 0;
 
-        weatherIconElement.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-        weatherIconElement.alt = data.weather[0].description;
-
         weatherDataElement.innerHTML = `
             <div class="main-weather">
+                <span class="weather-icon">${weatherIcon}</span>
                 <div class="temp-details">
                     <p class="main-temperature">${temperature}</p>
-                    <div class="min-max">
-                        <p>Мин: ${tempMin}</p>
-                        <p>Макс: ${tempMax}</p>
-                    </div>
-                    <p class="feels-like">${feelsLike}</p>
+                    <p class="main-temperature">${windSpeed}</p>
+                    <p class="main-temperature">${windDirection}</p>
                 </div>
             </div>
-            <div id="additional-weather-info" class="additional-info"></div>
         `;
 
-        setInterval(() => {
-            weatherIndex = (weatherIndex + 1) % weatherInfoArray.length;
-            additionalInfoElement.textContent = weatherInfoArray[weatherIndex];
-        }, 3000);
+        // setInterval(() => {
+        //     weatherIndex = (weatherIndex + 1) % weatherInfoArray.length;
+        //     additionalInfoElement.textContent = weatherInfoArray[weatherIndex];
+        // }, 3000);
 
     } catch (error) {
         console.error("Ошибка при получении погоды:", error);
         weatherDataElement.textContent = "Не удалось загрузить погоду";
     }
 }
+
+
+
 
 document.getElementById("back-to-top").addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
