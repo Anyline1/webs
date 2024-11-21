@@ -61,7 +61,6 @@ function fetchTopHeadlines(country, containerId) {
 
 async function fetchWeather() {
     const weatherDataElement = document.getElementById("weather-data");
-    const weatherIconElement = document.getElementById("weather-icon");
     const additionalInfoElement = document.getElementById("additional-weather-info");
     const latitude = 59.935894;
     const longitude = 30.338745;
@@ -76,34 +75,34 @@ async function fetchWeather() {
         const windSpeed = `Ветер: ${Math.round(data.current_weather.windspeed)} м/с`;
         const windDirection = `Направление ветра: ${data.current_weather.winddirection}°`;
         const isDay = data.current_weather.is_day === 1;
+        const weatherIcon = isDay ? "☀️" : "🌙";
 
         const weatherInfoArray = [windSpeed, windDirection];
 
         let weatherIndex = 0;
 
-        weatherIconElement.src = isDay ? "day_icon.png" : "night_icon.png";
-        weatherIconElement.alt = isDay ? "День" : "Ночь";
-
         weatherDataElement.innerHTML = `
             <div class="main-weather">
-                <img id="weather-icon" class="weather-icon" src="${weatherIconElement.src}" alt="${weatherIconElement.alt}">
+                <span class="weather-icon">${weatherIcon}</span>
                 <div class="temp-details">
                     <p class="main-temperature">${temperature}</p>
+                    <p class="main-temperature">${windSpeed}</p>
+                    <p class="main-temperature">${windDirection}</p>
                 </div>
             </div>
-            <div id="additional-weather-info" class="additional-info"></div>
         `;
 
-        setInterval(() => {
-            weatherIndex = (weatherIndex + 1) % weatherInfoArray.length;
-            additionalInfoElement.textContent = weatherInfoArray[weatherIndex];
-        }, 3000);
+        // setInterval(() => {
+        //     weatherIndex = (weatherIndex + 1) % weatherInfoArray.length;
+        //     additionalInfoElement.textContent = weatherInfoArray[weatherIndex];
+        // }, 3000);
 
     } catch (error) {
         console.error("Ошибка при получении погоды:", error);
         weatherDataElement.textContent = "Не удалось загрузить погоду";
     }
 }
+
 
 
 
