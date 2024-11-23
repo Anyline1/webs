@@ -4,16 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.querySelector('.modal-content .close');
 
     loginButton.addEventListener('click', () => {
-        loginModal.classList.remove('hidden');
+        loginModal.style.display = 'flex';
     });
 
     closeButton.addEventListener('click', () => {
-        loginModal.classList.add('hidden');
+        loginModal.style.display = 'none';
     });
 
     window.addEventListener('click', (event) => {
         if (event.target === loginModal) {
-            loginModal.classList.add('hidden');
+            loginModal.style.display = 'none';
         }
     });
 });
