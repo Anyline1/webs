@@ -20,8 +20,22 @@
             <div id="date" class="date">Дата</div>
             <div id="time" class="time">Время</div>
         </div>
+        <button id="login-button" class="login-button">Войти</button>
     </div>
 </header>
+<div id="login-modal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Авторизация</h2>
+        <form id="login-form" action="welcome.html" method="GET">
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="username" name="username" placeholder="Введите имя" required>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+            <button type="submit" class="login-submit">Войти</button>
+        </form>
+    </div>
+</div>
 <div class="container">
     <section class="search-block">
         <form class="news-search" action="#" method="GET">
