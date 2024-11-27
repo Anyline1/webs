@@ -110,3 +110,35 @@
         width: 100%;
     }
 }
+
+#login-form button[type="submit"] {
+    background-color: #1a73e8;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+#login-form button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+#login-form button[type="submit"]:focus {
+    outline: 2px solid #4ca1af;
+    outline-offset: 2px;
+}
+
+
