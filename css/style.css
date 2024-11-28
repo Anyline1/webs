@@ -81,12 +81,12 @@ header {
     padding: 0 20px;
 }
 
-/*.info-block {*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    gap: 15px;*/
-/*    margin-bottom: 20px;*/
-/*}*/
+.info-block {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
 
 .info-block a {
     text-decoration: none;
