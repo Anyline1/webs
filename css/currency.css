@@ -1,54 +1,112 @@
+.info-block {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.info-item {
+    flex: 1;
+    background-color: #f0f8ff;
+    border: 1px solid #b0c4de;
+    border-radius: 8px;
+    padding: 6px 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+}
+
+.weather-icon {
+    width: 28px;
+    height: 28px;
+}
+
+.weather-data {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+}
+
 .currency-rates {
     display: flex;
-    flex-direction: column;
+    gap: 8px;
     align-items: center;
-    font-size: 14px;
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    width: 220px;
-}
-
-.fixed-currencies {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.additional-currencies {
-    margin-top: 20px;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-    width: 100%;
-    text-align: center;
+    flex: 1;
+    justify-content: center;
 }
 
 .currency-item {
     background-color: #ffffff;
-    border-radius: 8px;
-    padding: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.currency-item.active {
-    color: #0056b3;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    padding: 4px 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .currency-item:hover {
-    background-color: #f0f0f0;
+    background-color: #f5f5f5;
+    transform: scale(1.05);
 }
 
 body.dark .currency-item {
-    background-color: #333;
+    background-color: #444;
     color: #eaeaea;
-    border-color: #555;
+    border-color: #666;
 }
 
 body.dark .currency-item:hover {
-    background-color: #444;
+    background-color: #555;
+}
+
+@media (max-width: 768px) {
+    .info-block {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .info-item {
+        flex-direction: column;
+        padding: 6px 8px;
+    }
+
+    .weather-info {
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    .weather-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .weather-data {
+        font-size: 13px;
+    }
+
+    .currency-rates {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .currency-item {
+        font-size: 12px;
+        padding: 4px;
+    }
 }
