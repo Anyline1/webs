@@ -1,4 +1,4 @@
-const apiKey = '';
+const apiKey = '25e38454a0f2af6bc314bc8b76dc55b1';
 const weatherApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=55.7558&lon=37.6173&exclude=minutely,hourly&units=metric&appid=${apiKey}&lang=ru`;
 
 const currentWeatherContainer = document.getElementById('current-weather');
