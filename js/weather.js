@@ -11,7 +11,7 @@ async function fetchWeatherData() {
             throw new Error('Failed to fetch weather data');
         }
         const weatherData = await response.json();
-        displayCurrentWeather(weatherData.list[0]); // Display the first forecast as current weather
+        displayCurrentWeather(weatherData.list[0]);
         displayWeeklyForecast(weatherData.list);
     } catch (error) {
         currentWeatherContainer.innerHTML = `<p>Ошибка загрузки данных о текущей погоде.</p>`;
@@ -31,7 +31,6 @@ function displayCurrentWeather(current) {
 }
 
 function displayWeeklyForecast(forecastList) {
-    // Group forecasts by day
     const dailyForecasts = forecastList.reduce((acc, forecast) => {
         const date = new Date(forecast.dt * 1000).toLocaleDateString('ru-RU');
         if (!acc[date]) {
