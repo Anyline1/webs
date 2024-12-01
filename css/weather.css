@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #4682b4;
+    background-color: #d1e9ff;
     color: #fff;
     padding: 10px 20px;
     text-align: center;
@@ -38,7 +38,7 @@ main {
 .weather-block .temp, .forecast-day .temp {
     font-size: 20px;
     font-weight: bold;
-    color: #4682b4;
+    color: #d1e9ff;
 }
 
 .weather-block .description, .forecast-day .description {
