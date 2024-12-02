@@ -1,21 +1,25 @@
-const majorCurrencies = [
-    { name: 'USD', rate: '75.50' },
-    { name: 'EUR', rate: '82.40' },
-    { name: 'GBP', rate: '94.10' }
-];
+const apiUrl = 'https://api.exchangerate-api.com/v4/latest/RUB';
 
-const extraCurrencies = [
-    { name: 'JPY', rate: '0.65' },
-    { name: 'AUD', rate: '48.20' },
-    { name: 'CAD', rate: '54.30' }
-];
+async function fetchCurrencies() {
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`Ошибка загрузки данных: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data.rates;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
 
-function displayCurrencies(currencies, containerId) {
+function displayCurrencies(currencies, containerId, currencyKeys) {
     const container = document.getElementById(containerId);
-    container.innerHTML = ''; 
+    container.innerHTML = ''; // Очистка контейнера
 
-    if (!currencies.length) {
-        container.innerHTML = '<p>Данные отсутствуют</p>';
+    if (!currencies) {
+        container.innerHTML = '<p>Не удалось загрузить данные</p>';
         return;
     }
 
@@ -23,17 +27,25 @@ function displayCurrencies(currencies, containerId) {
     list.style.listStyle = 'none';
     list.style.padding = '0';
 
-    currencies.forEach(currency => {
-        const item = document.createElement('li');
-        item.style.marginBottom = '10px';
-        item.textContent = `${currency.name}: ${currency.rate} RUB`;
-        list.appendChild(item);
+    currencyKeys.forEach(key => {
+        if (currencies[key]) {
+            const item = document.createElement('li');
+            item.style.marginBottom = '10px';
+            const rate = (1 / currencies[key]).toFixed(2);
+            item.textContent = `${key}: ${rate} RUB`;
+            list.appendChild(item);
+        }
     });
 
     container.appendChild(list);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    displayCurrencies(majorCurrencies, 'major-currencies');
-    displayCurrencies(extraCurrencies, 'extra-currencies');
+document.addEventListener('DOMContentLoaded', async () => {
+    const currencies = await fetchCurrencies();
+
+    const majorCurrencyKeys = ['USD', 'EUR', 'GBP'];
+    const extraCurrencyKeys = ['JPY', 'AUD', 'CAD'];
+
+    displayCurrencies(currencies, 'major-currencies', majorCurrencyKeys);
+    displayCurrencies(currencies, 'extra-currencies', extraCurrencyKeys);
 });
