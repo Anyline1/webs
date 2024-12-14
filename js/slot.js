@@ -31,10 +31,14 @@ function spinReels(results) {
 
     reelIds.forEach((reelId, index) => {
         const reel = document.getElementById(reelId).querySelector('.symbols');
+
         reel.style.transform = 'translateY(0)';
 
+        // Устанавливаем новые символы
+        updateReel(reelId, [results[index]]);
+
+        // Анимация прокрутки к центральному ряду
         setTimeout(() => {
-            updateReel(reelId, [results[index]]);
             reel.style.transform = 'translateY(-120px)';
         }, index * 200);
     });
