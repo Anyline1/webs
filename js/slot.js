@@ -56,5 +56,5 @@ document.getElementById('spinButton').addEventListener('click', () => {
 
     setTimeout(() => {
         checkWin(results);
-    }, 1200); 
+    }, 1200);
 });
