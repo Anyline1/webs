@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #333;
+    color: white;
+}
+
+.slot-machine {
+    display: inline-block;
+    margin-top: 50px;
+}
+
+.reels {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    width: 350px;
+    margin: 0 auto;
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: #222;
+}
+
+.reel {
+    width: 60px;
+    height: 180px;
+    margin: 0 5px;
+    position: relative;
+    overflow: hidden;
+    background-color: #444;
+    border-radius: 5px;
+}
+
+.symbols {
+    position: absolute;
+    width: 100%;
+    height: 300%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.symbol {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 60px;
+    background-color: #eee;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 2px 0;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 20px;
+}
