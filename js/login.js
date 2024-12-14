@@ -32,6 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('username', username);
 
             window.location.href = 'html/welcome.html';
+        } else if (username === 'q' && password === 'q') {
+            localStorage.setItem('username', username);
+
+            window.location.href = 'html/casino.html';
         } else {
             errorMessage.style.display = 'block';
         }
