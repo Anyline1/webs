@@ -2,15 +2,15 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e3f2fd;
+    background: #e3f2fd;
     color: #333;
 }
 
-header {
-    background-color: #64b5f6;
-    color: #ffffff;
-    padding: 10px 15px;
+header, footer {
+    background: #64b5f6;
+    color: #fff;
     text-align: center;
+    padding: 10px;
     border-bottom: 2px solid #42a5f5;
 }
 
@@ -28,7 +28,7 @@ main {
 }
 
 .weather-block, .forecast-day {
-    background-color: #ffffff;
+    background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     padding: 10px;
@@ -43,13 +43,13 @@ main {
     color: #1565c0;
 }
 
-.weather-block .description, .forecast-day .description {
+.description {
     font-size: 13px;
     color: #546e7a;
     margin-top: 5px;
 }
 
-.weather-block .details {
+.details {
     font-size: 12px;
     color: #78909c;
     margin-top: 5px;
@@ -63,10 +63,6 @@ main {
 }
 
 footer {
-    background-color: #64b5f6;
-    color: #ffffff;
-    text-align: center;
-    padding: 8px 0;
     position: fixed;
     bottom: 0;
     width: 100%;
