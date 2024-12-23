@@ -25,9 +25,6 @@ function populateReel(reelId, symbols) {
 function spinReel(reelId, targetSymbol, stopIndex, duration) {
     const reel = document.getElementById(reelId).querySelector('.symbols');
     const symbolHeight = 60;
-    const visibleSymbols = 6;
-    const totalSymbols = reel.children.length;
-
     const stopPosition = -(symbolHeight * stopIndex);
 
     return new Promise(resolve => {
@@ -43,30 +40,35 @@ function spinReel(reelId, targetSymbol, stopIndex, duration) {
 
 function checkWin(results) {
     const message = document.getElementById('message');
+    const winningCombination = document.getElementById('winningCombination');
 
     if (results.every(symbol => symbol === results[0])) {
-        message.textContent = `🎉 Jackpot! ${results[0]} x5!`;
+        message.textContent = `🎉 Джекпот! ${results[0]} x5!`;
+        winningCombination.textContent = `${results[0]} x5`;
         return;
     }
 
     if (results[0] === results[1] && results[1] === results[2]) {
-        message.textContent = `✨ Big Win! ${results[1]} x3 in the center!`;
+        message.textContent = `✨ Большой выигрыш! ${results[1]} x3 in the center!`;
+        winningCombination.textContent = `${results[1]} x3`;
         return;
     }
 
     for (let i = 0; i < results.length - 1; i++) {
         if (results[i] === results[i + 1]) {
-            message.textContent = `👍 Small Win! ${results[i]} x2!`;
+            message.textContent = `👍 Малый выигрыш! ${results[i]} x2!`;
+            winningCombination.textContent = `${results[i]} x2`;
             return;
         }
     }
 
-    message.textContent = "😞 Try again!";
+    message.textContent = "😞 Попробуй снова!";
+    winningCombination.textContent = "-";
 }
 
 async function spinReels() {
     const message = document.getElementById('message');
-    message.textContent = "🎰 Spinning...";
+    message.textContent = "🎰 Вращение...";
 
     const reelSymbols = reels.map(() => generateReelSymbols(30));
     const results = reels.map(() => getRandomSymbol());
