@@ -26,10 +26,9 @@ function spinReel(reelId, targetSymbol, stopIndex, duration) {
     const reel = document.getElementById(reelId).querySelector('.symbols');
     const symbolHeight = 60;
     const visibleSymbols = 6;
-    const extraSymbols = 9;
     const totalSymbols = reel.children.length;
 
-    const stopPosition = -(symbolHeight * (stopIndex + extraSymbols)); // Конечная позиция
+    const stopPosition = -(symbolHeight * stopIndex);
 
     return new Promise(resolve => {
         reel.style.transition = `transform ${duration}ms cubic-bezier(0.25, 0.1, 0.25, 1)`;
@@ -37,16 +36,6 @@ function spinReel(reelId, targetSymbol, stopIndex, duration) {
 
         setTimeout(() => {
             reel.style.transition = 'none';
-
-            const newSymbols = generateReelSymbols(extraSymbols);
-            for (let i = 0; i < extraSymbols; i++) {
-                const div = document.createElement('div');
-                div.className = 'symbol';
-                div.textContent = newSymbols[i];
-                reel.appendChild(div);
-            }
-
-            reel.style.transform = `translateY(${-symbolHeight * extraSymbols}px)`;
             resolve();
         }, duration);
     });
@@ -80,9 +69,9 @@ async function spinReels() {
     message.textContent = "🎰 Spinning...";
 
     const reelSymbols = reels.map(() => generateReelSymbols(30));
-    const results = [...Array(reels.length)].map(() => getRandomSymbol());
+    const results = reels.map(() => getRandomSymbol());
 
-    reels.forEach((reelId, index) => populateReel(reelId, [...generateReelSymbols(5), ...reelSymbols[index]]));
+    reels.forEach((reelId, index) => populateReel(reelId, reelSymbols[index]));
 
     const stopIndices = results.map((symbol, index) => {
         const symbolIndex = reelSymbols[index].indexOf(symbol);
