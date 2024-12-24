@@ -6,8 +6,12 @@ function getRandomSymbol() {
     return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
-function generateReelSymbols(total = 30) {
-    return [...Array(total)].map(() => getRandomSymbol());
+function generateReelSymbolsWithTarget(targetSymbol, total = 30) {
+    
+    const symbolsCopy = Array.from({ length: total }, () => getRandomSymbol());
+    const randomIndex = Math.floor(Math.random() * total);
+    symbolsCopy[randomIndex] = targetSymbol;
+    return symbolsCopy;
 }
 
 function populateReel(reelId, symbols) {
