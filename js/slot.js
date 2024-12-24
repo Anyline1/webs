@@ -6,8 +6,12 @@ function getRandomSymbol() {
     return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
-function generateReelSymbols(total = 30) {
-    return [...Array(total)].map(() => getRandomSymbol());
+function generateReelSymbolsWithTarget(targetSymbol, total = 30) {
+
+    const symbolsCopy = Array.from({ length: total }, () => getRandomSymbol());
+    const randomIndex = Math.floor(Math.random() * total);
+    symbolsCopy[randomIndex] = targetSymbol;
+    return symbolsCopy;
 }
 
 function populateReel(reelId, symbols) {
@@ -49,8 +53,52 @@ function checkWin(results) {
     }
 
     if (results[0] === results[1] && results[1] === results[2]) {
-        message.textContent = `✨ Большой выигрыш! ${results[1]} x3 in the center!`;
-        winningCombination.textContent = `${results[1]} x3`;
+        message.textContent = `✨ Большой выигрыш! ${results[0]} x3 в начале!`;
+        winningCombination.textContent = `${results[0]} x3 (начало)`;
+        return;
+    }
+
+    if (results[2] === results[3] && results[3] === results[4]) {
+        message.textContent = `✨ Большой выигрыш! ${results[2]} x3 в конце!`;
+        winningCombination.textContent = `${results[2]} x3 (конец)`;
+        return;
+    }
+
+    for (let i = 0; i < results.length - 2; i++) {
+        if (results[i] === results[i + 1] && results[i + 1] === results[i + 2]) {
+            message.textContent = `🎊 Выигрыш! ${results[i]} x3 подряд!`;
+            winningCombination.textContent = `${results[i]} x3 подряд`;
+            return;
+        }
+    }
+
+    if (results[0] === results[4]) {
+        message.textContent = `✨ Выигрыш! ${results[0]} x2 на краях!`;
+        winningCombination.textContent = `${results[0]} x2 (края)`;
+        return;
+    }
+
+    if (results.filter(symbol => symbol === "7️⃣").length >= 3) {
+        message.textContent = `🔥 Выигрыш! "7️⃣" x3 или больше!`;
+        winningCombination.textContent = `"7️⃣" x3+`;
+        return;
+    }
+
+    if (results.includes("⭐") && results.includes("🔔") && results.includes("🍋")) {
+        message.textContent = `🌟 Удачная последовательность! ⭐🔔🍋!`;
+        winningCombination.textContent = `⭐🔔🍋`;
+        return;
+    }
+
+    if (new Set(results).size === results.length) {
+        message.textContent = `🌈 Все символы разные! Выигрыш!`;
+        winningCombination.textContent = `Все разные!`;
+        return;
+    }
+
+    if (results[1] === results[2] || results[2] === results[3]) {
+        message.textContent = `🎉 Центральная пара! ${results[2]} x2!`;
+        winningCombination.textContent = `${results[2]} x2 (центр)`;
         return;
     }
 
@@ -66,12 +114,14 @@ function checkWin(results) {
     winningCombination.textContent = "-";
 }
 
+
 async function spinReels() {
     const message = document.getElementById('message');
     message.textContent = "🎰 Вращение...";
 
-    const reelSymbols = reels.map(() => generateReelSymbols(30));
     const results = reels.map(() => getRandomSymbol());
+
+    const reelSymbols = results.map(symbol => generateReelSymbolsWithTarget(symbol, 30));
 
     reels.forEach((reelId, index) => populateReel(reelId, reelSymbols[index]));
 
