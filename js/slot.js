@@ -7,7 +7,7 @@ function getRandomSymbol() {
 }
 
 function generateReelSymbolsWithTarget(targetSymbol, total = 30) {
-    
+
     const symbolsCopy = Array.from({ length: total }, () => getRandomSymbol());
     const randomIndex = Math.floor(Math.random() * total);
     symbolsCopy[randomIndex] = targetSymbol;
@@ -119,8 +119,9 @@ async function spinReels() {
     const message = document.getElementById('message');
     message.textContent = "🎰 Вращение...";
 
-    const reelSymbols = reels.map(() => generateReelSymbols(30));
     const results = reels.map(() => getRandomSymbol());
+
+    const reelSymbols = results.map(symbol => generateReelSymbolsWithTarget(symbol, 30));
 
     reels.forEach((reelId, index) => populateReel(reelId, reelSymbols[index]));
 
