@@ -1,7 +1,12 @@
 const symbols = ["🍒", "🍋", "🔔", "⭐", "7️⃣"];
 const spinDurationBase = 3000;
 const reels = ['reel1', 'reel2', 'reel3', 'reel4', 'reel5'];
+let balance = 1000; 
 
+function updateBalance(amount) {
+    balance += amount;
+    document.getElementById('balance').textContent = balance;
+}
 function getRandomSymbol() {
     return symbols[Math.floor(Math.random() * symbols.length)];
 }
