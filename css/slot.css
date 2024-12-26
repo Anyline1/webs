@@ -25,6 +25,16 @@ h1 {
     max-width: 600px;
 }
 
+.balance, .bet {
+    margin: 10px 0;
+    text-align: center;
+}
+
+#betAmount {
+    width: 60px;
+    text-align: center;
+}
+
 .reels {
     display: flex;
     justify-content: space-between;
