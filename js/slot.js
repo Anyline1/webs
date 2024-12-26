@@ -89,6 +89,12 @@ async function spinReels() {
     const message = document.getElementById('message');
     message.textContent = "🎰 Вращение...";
 
+    const betAmount = parseInt(document.getElementById('betAmount').value, 10);
+    if (balance < betAmount) {
+        message.textContent = "❌ Недостаточно средств для ставки!";
+        return;
+    }
+
     const reelSymbols = reels.map(() => generateReelSymbols(30));
     const results = reels.map(() => getRandomSymbol());
 
@@ -106,7 +112,7 @@ async function spinReels() {
 
     await Promise.all(spinPromises);
 
-    checkWin(results);
+    checkWinWithBet(results);
 }
 
 document.getElementById('spinButton').addEventListener('click', () => {
