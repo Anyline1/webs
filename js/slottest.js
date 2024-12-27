@@ -48,12 +48,42 @@ jest.mock('./slot', () => ({
     checkWinWithBet: mockFunctions1.checkWinWithBet,
 }));
 
-const { spinReels } = require('./slot');
+const { spinReels2 } = require('./slot');
 
 test('Should handle a bet amount that is a negative number', async () => {
-    await spinReels();
+    await spinReels2();
 
     expect(mockElements1.message.textContent).toBe('❌ Недостаточно средств для ставки!');
     expect(mockFunctions1.updateBalance).not.toHaveBeenCalled();
     expect(mockFunctions1.checkWinWithBet).not.toHaveBeenCalled();
+});
+
+const mockElements3 = {
+    balance: { textContent: '1000' },
+    betAmount: { value: '0' },
+    message: { textContent: '' },
+};
+
+const mockFunctions3 = {
+    updateBalance: jest.fn(),
+    checkWinWithBet: jest.fn(),
+};
+
+jest.mock('./slot', () => ({
+    ...jest.requireActual('./slot'),
+    document: {
+        getElementById: id => mockElements[id],
+    },
+    updateBalance: mockFunctions3.updateBalance,
+    checkWinWithBet: mockFunctions3.checkWinWithBet,
+}));
+
+const { spinReels3 } = require('./slot');
+
+test('Should handle a bet amount that is zero', async () => {
+    await spinReels3();
+
+    expect(mockElements3.message.textContent).toBe('❌ Недостаточно средств для ставки!');
+    expect(mockFunctions3.updateBalance).not.toHaveBeenCalled();
+    expect(mockFunctions3.checkWinWithBet).not.toHaveBeenCalled();
 });
