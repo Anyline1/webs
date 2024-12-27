@@ -87,3 +87,43 @@ test('Should handle a bet amount that is zero', async () => {
     expect(mockFunctions3.updateBalance).not.toHaveBeenCalled();
     expect(mockFunctions3.checkWinWithBet).not.toHaveBeenCalled();
 });
+
+// Unit test for handling a bet amount that exceeds the maximum balance
+
+// Mock the necessary DOM elements and functions
+const mockBalanceElement = { textContent: 1000 };
+const mockBetAmountElement = { value: 1001 };
+const mockMessageElement = { textContent: '' };
+
+jest.spyOn(document, 'getElementById').mockImplementation((id) => {
+    switch (id) {
+        case 'balance':
+            return mockBalanceElement;
+        case 'betAmount':
+            return mockBetAmountElement;
+        case 'message':
+            return mockMessageElement;
+        default:
+            return null;
+    }
+});
+
+const mockUpdateBalance = jest.fn();
+jest.spyOn(window, 'updateBalance').mockImplementation(mockUpdateBalance);
+
+const mockCheckWinWithBet = jest.fn();
+jest.spyOn(window, 'checkWinWithBet').mockImplementation(mockCheckWinWithBet);
+
+const mockSpinReel = jest.fn();
+jest.spyOn(window, 'spinReel').mockImplementation(mockSpinReel);
+
+const mockSpinReels = jest.fn();
+jest.spyOn(window, 'spinReels').mockImplementation(mockSpinReels);
+
+test('handles a bet amount that exceeds the maximum balance', async () => {
+    await spinReels();
+
+    expect(mockMessageElement.textContent).toBe('❌ Недостаточно средств для ставки!');
+    expect(mockUpdateBalance).not.toHaveBeenCalled();
+    expect(mockCheckWinWithBet).not.toHaveBeenCalled();
+});
