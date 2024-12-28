@@ -88,9 +88,6 @@ test('Should handle a bet amount that is zero', async () => {
     expect(mockFunctions3.checkWinWithBet).not.toHaveBeenCalled();
 });
 
-// Unit test for handling a bet amount that exceeds the maximum balance
-
-// Mock the necessary DOM elements and functions
 const mockBalanceElement = { textContent: 1000 };
 const mockBetAmountElement = { value: 1001 };
 const mockMessageElement = { textContent: '' };
