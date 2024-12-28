@@ -233,3 +233,16 @@ test('handles bet amount as an array', () => {
     const message = document.getElementById('message');
     expect(message.textContent).toBe(expectedErrorMessage);
 });
+
+
+const betAmount = true;
+const expectedErrorMessage = "❌ Недостаточно средств для ставки!";
+
+const message = document.getElementById('message');
+const betAmountValue = parseInt(betAmount.value, 10);
+
+if (balance < betAmountValue) {
+    message.textContent = expectedErrorMessage;
+}
+
+expect(message.textContent).toBe(expectedErrorMessage);
