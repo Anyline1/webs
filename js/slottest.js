@@ -88,18 +88,18 @@ test('Should handle a bet amount that is zero', async () => {
     expect(mockFunctions3.checkWinWithBet).not.toHaveBeenCalled();
 });
 
-const mockBalanceElement = { textContent: 1000 };
-const mockBetAmountElement = { value: 1001 };
-const mockMessageElement = { textContent: '' };
+const mockBalanceElement4 = { textContent: 1000 };
+const mockBetAmountElement4 = { value: 1001 };
+const mockMessageElement4 = { textContent: '' };
 
 jest.spyOn(document, 'getElementById').mockImplementation((id) => {
     switch (id) {
         case 'balance':
-            return mockBalanceElement;
+            return mockBalanceElement4;
         case 'betAmount':
-            return mockBetAmountElement;
+            return mockBetAmountElement4;
         case 'message':
-            return mockMessageElement;
+            return mockMessageElement4;
         default:
             return null;
     }
@@ -124,3 +124,4 @@ test('handles a bet amount that exceeds the maximum balance', async () => {
     expect(mockUpdateBalance).not.toHaveBeenCalled();
     expect(mockCheckWinWithBet).not.toHaveBeenCalled();
 });
+
