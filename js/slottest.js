@@ -88,21 +88,18 @@ test('Should handle a bet amount that is zero', async () => {
     expect(mockFunctions3.checkWinWithBet).not.toHaveBeenCalled();
 });
 
-// Unit test for handling a bet amount that exceeds the maximum balance
-
-// Mock the necessary DOM elements and functions
-const mockBalanceElement = { textContent: 1000 };
-const mockBetAmountElement = { value: 1001 };
-const mockMessageElement = { textContent: '' };
+const mockBalanceElement4 = { textContent: 1000 };
+const mockBetAmountElement4 = { value: 1001 };
+const mockMessageElement4 = { textContent: '' };
 
 jest.spyOn(document, 'getElementById').mockImplementation((id) => {
     switch (id) {
         case 'balance':
-            return mockBalanceElement;
+            return mockBalanceElement4;
         case 'betAmount':
-            return mockBetAmountElement;
+            return mockBetAmountElement4;
         case 'message':
-            return mockMessageElement;
+            return mockMessageElement4;
         default:
             return null;
     }
@@ -127,3 +124,124 @@ test('handles a bet amount that exceeds the maximum balance', async () => {
     expect(mockUpdateBalance).not.toHaveBeenCalled();
     expect(mockCheckWinWithBet).not.toHaveBeenCalled();
 });
+
+const mockBalanceElement5 = { textContent: 1000 };
+const mockBetAmountElement5 = { value: NaN };
+const mockMessageElement5 = { textContent: '' };
+
+jest.spyOn(document, 'getElementById').mockImplementation((id) => {
+    switch (id) {
+        case 'balance':
+            return mockBalanceElement5;
+        case 'betAmount':
+            return mockBetAmountElement5;
+        case 'message':
+            return mockMessageElement5;
+        default:
+            return null;
+    }
+});
+
+const mockUpdateBalance5 = jest.fn();
+jest.spyOn(window, 'updateBalance').mockImplementation(mockUpdateBalance5);
+
+const mockCheckWinWithBet5 = jest.fn();
+jest.spyOn(window, 'checkWinWithBet').mockImplementation(mockCheckWinWithBet5);
+
+test('handles a bet amount that is NaN', async () => {
+    await spinReels();
+
+    expect(mockMessageElement.textContent).toBe('❌ Недостаточно средств для ставки!');
+    expect(mockUpdateBalance).not.toHaveBeenCalled();
+    expect(mockCheckWinWithBet).not.toHaveBeenCalled();
+});
+
+const mockBalanceElement = { textContent: '1000' };
+const mockMessageElement = { textContent: '' };
+const mockWinningCombinationElement = { textContent: '' };
+const mockBetAmountElement = { value: 'symbol' };
+
+jest.mock('document', () => ({
+    getElementById: jest.fn(id => {
+        switch (id) {
+            case 'balance':
+                return mockBalanceElement;
+            case 'message':
+                return mockMessageElement;
+            case 'winningCombination':
+                return mockWinningCombinationElement;
+            case 'betAmount':
+                return mockBetAmountElement;
+            default:
+                return null;
+        }
+    }),
+}));
+
+jest.mock('./slot', () => ({
+    updateBalance: jest.fn(),
+    checkWinWithBet: jest.fn(),
+}));
+
+const { updateBalance, checkWinWithBet } = require('./slot');
+
+test('handles a bet amount that is a symbol', () => {
+    const betAmount = 'symbol';
+    mockBetAmountElement.value = betAmount;
+
+    checkWinWithBet();
+
+    expect(mockMessageElement.textContent).toBe('❌ Недостаточно средств для ставки!');
+    expect(updateBalance).not.toHaveBeenCalled();
+});
+
+const betAmount = { value: 100 };
+const expectedErrorMessage = "❌ Недостаточно средств для ставки!";
+
+const message = document.getElementById('message');
+const betAmountValue = parseInt(betAmount.value, 10);
+
+if (balance < betAmountValue) {
+    message.textContent = expectedErrorMessage;
+}
+
+expect(message.textContent).toBe(expectedErrorMessage);
+
+test('handles bet amount as an array', () => {
+    const betAmount = [100, 200, 300];
+    const expectedErrorMessage = '❌ Недостаточно средств для ставки!';
+
+    jest.mock('document', () => ({
+        getElementById: jest.fn(id => {
+            switch (id) {
+                case 'balance':
+                    return { textContent: 1000 };
+                case 'message':
+                    return { textContent: '' };
+                case 'betAmount':
+                    return { value: betAmount.join(',') };
+                default:
+                    return null;
+            }
+        }),
+    }));
+
+    const { checkWinWithBet } = require('./slot');
+
+    checkWinWithBet();
+
+    const message = document.getElementById('message');
+    expect(message.textContent).toBe(expectedErrorMessage);
+});
+
+const betAmount = true;
+const expectedErrorMessage = "❌ Недостаточно средств для ставки!";
+
+const message = document.getElementById('message');
+const betAmountValue = parseInt(betAmount.value, 10);
+
+if (balance < betAmountValue) {
+    message.textContent = expectedErrorMessage;
+}
+
+expect(message.textContent).toBe(expectedErrorMessage);
