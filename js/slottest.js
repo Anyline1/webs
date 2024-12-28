@@ -206,3 +206,30 @@ if (balance < betAmountValue) {
 }
 
 expect(message.textContent).toBe(expectedErrorMessage);
+
+test('handles bet amount as an array', () => {
+    const betAmount = [100, 200, 300];
+    const expectedErrorMessage = '❌ Недостаточно средств для ставки!';
+
+    jest.mock('document', () => ({
+        getElementById: jest.fn(id => {
+            switch (id) {
+                case 'balance':
+                    return { textContent: 1000 };
+                case 'message':
+                    return { textContent: '' };
+                case 'betAmount':
+                    return { value: betAmount.join(',') };
+                default:
+                    return null;
+            }
+        }),
+    }));
+
+    const { checkWinWithBet } = require('./slot');
+
+    checkWinWithBet();
+
+    const message = document.getElementById('message');
+    expect(message.textContent).toBe(expectedErrorMessage);
+});
