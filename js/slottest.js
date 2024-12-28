@@ -245,3 +245,20 @@ if (balance < betAmountValue) {
 }
 
 expect(message.textContent).toBe(expectedErrorMessage);
+
+it('should handle a bet amount that is a non-numeric string', () => {
+    const betAmount = 'invalid';
+    const expectedErrorMessage = "❌ Недостаточно средств для ставки!";
+
+    const mockElement = { textContent: '' };
+    jest.spyOn(document, 'getElementById').mockImplementation((id) => {
+        if (id === 'message') {
+            return mockElement;
+        }
+        return null;
+    });
+
+    checkWinWithBet(['symbol1', 'symbol2', 'symbol3', 'symbol4', 'symbol5']);
+
+    expect(mockElement.textContent).toBe(expectedErrorMessage);
+});
