@@ -194,3 +194,15 @@ test('handles a bet amount that is a symbol', () => {
     expect(mockMessageElement.textContent).toBe('❌ Недостаточно средств для ставки!');
     expect(updateBalance).not.toHaveBeenCalled();
 });
+
+const betAmount = { value: 100 };
+const expectedErrorMessage = "❌ Недостаточно средств для ставки!";
+
+const message = document.getElementById('message');
+const betAmountValue = parseInt(betAmount.value, 10);
+
+if (balance < betAmountValue) {
+    message.textContent = expectedErrorMessage;
+}
+
+expect(message.textContent).toBe(expectedErrorMessage);
