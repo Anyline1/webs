@@ -155,3 +155,42 @@ test('handles a bet amount that is NaN', async () => {
     expect(mockUpdateBalance).not.toHaveBeenCalled();
     expect(mockCheckWinWithBet).not.toHaveBeenCalled();
 });
+
+const mockBalanceElement = { textContent: '1000' };
+const mockMessageElement = { textContent: '' };
+const mockWinningCombinationElement = { textContent: '' };
+const mockBetAmountElement = { value: 'symbol' };
+
+jest.mock('document', () => ({
+    getElementById: jest.fn(id => {
+        switch (id) {
+            case 'balance':
+                return mockBalanceElement;
+            case 'message':
+                return mockMessageElement;
+            case 'winningCombination':
+                return mockWinningCombinationElement;
+            case 'betAmount':
+                return mockBetAmountElement;
+            default:
+                return null;
+        }
+    }),
+}));
+
+jest.mock('./slot', () => ({
+    updateBalance: jest.fn(),
+    checkWinWithBet: jest.fn(),
+}));
+
+const { updateBalance, checkWinWithBet } = require('./slot');
+
+test('handles a bet amount that is a symbol', () => {
+    const betAmount = 'symbol';
+    mockBetAmountElement.value = betAmount;
+
+    checkWinWithBet();
+
+    expect(mockMessageElement.textContent).toBe('❌ Недостаточно средств для ставки!');
+    expect(updateBalance).not.toHaveBeenCalled();
+});
