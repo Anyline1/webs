@@ -234,7 +234,6 @@ test('handles bet amount as an array', () => {
     expect(message.textContent).toBe(expectedErrorMessage);
 });
 
-
 const betAmount = true;
 const expectedErrorMessage = "❌ Недостаточно средств для ставки!";
 
