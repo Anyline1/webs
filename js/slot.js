@@ -143,25 +143,27 @@ async function spinReels() {
         return;
     }
 
-    const targetSymbol = getRandomSymbol();
-    const reelSymbols = reels.map(() => generateReelSymbolsWithTarget(targetSymbol, 30));
+    const results = reels.map(() => getRandomSymbol());
+
+    const reelSymbols = reels.map((_, index) =>
+        generateReelSymbolsWithTarget(results[index], 30)
+    );
 
     reels.forEach((reelId, index) => populateReel(reelId, reelSymbols[index]));
 
-    const stopIndex = reelSymbols[0].indexOf(targetSymbol);
+    const stopIndices = results.map((symbol, index) =>
+        reelSymbols[index].indexOf(symbol)
+    );
 
     const spinPromises = reels.map((reelId, index) => {
         const randomDuration = spinDurationBase + Math.random() * 500;
-        return spinReel(reelId, targetSymbol, stopIndex, randomDuration);
+        return spinReel(reelId, results[index], stopIndices[index], randomDuration);
     });
 
     await Promise.all(spinPromises);
 
-    const results = reels.map(() => targetSymbol);
-
     checkWinWithBet(results);
 }
-
 
 document.getElementById('spinButton').addEventListener('click', () => {
     spinReels();
