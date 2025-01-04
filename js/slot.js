@@ -34,9 +34,7 @@ function populateReel(reelId, symbols) {
 function spinReel(reelId, targetSymbol, stopIndex, duration) {
     const reel = document.getElementById(reelId).querySelector('.symbols');
     const symbolHeight = 60;
-    const visibleSymbols = 3;
-    const centerIndex = Math.floor(visibleSymbols / 2);
-    const stopPosition = -(symbolHeight * (stopIndex - centerIndex));
+    const stopPosition = -(symbolHeight * stopIndex);
 
     return new Promise(resolve => {
         reel.style.transition = `transform ${duration}ms cubic-bezier(0.25, 0.1, 0.25, 1)`;
