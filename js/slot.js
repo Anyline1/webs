@@ -133,35 +133,35 @@ function checkWinWithBet(results) {
     winningCombination.textContent = "-";
 }
 
-
 async function spinReels() {
     const message = document.getElementById('message');
     message.textContent = "🎰 Вращение...";
-
 
     const betAmount = parseInt(document.getElementById('betAmount').value, 10);
     if (balance < betAmount) {
         message.textContent = "❌ Недостаточно средств для ставки!";
         return;
     }
-    const reelSymbols = results.map(symbol => generateReelSymbolsWithTarget(symbol, 30));
+
+    const targetSymbol = getRandomSymbol();
+    const reelSymbols = reels.map(() => generateReelSymbolsWithTarget(targetSymbol, 30));
 
     reels.forEach((reelId, index) => populateReel(reelId, reelSymbols[index]));
 
-    const stopIndices = results.map((symbol, index) => {
-        const symbolIndex = reelSymbols[index].indexOf(symbol);
-        return symbolIndex !== -1 ? symbolIndex : 0;
-    });
+    const stopIndex = reelSymbols[0].indexOf(targetSymbol);
 
     const spinPromises = reels.map((reelId, index) => {
         const randomDuration = spinDurationBase + Math.random() * 500;
-        return spinReel(reelId, results[index], stopIndices[index], randomDuration);
+        return spinReel(reelId, targetSymbol, stopIndex, randomDuration);
     });
 
     await Promise.all(spinPromises);
 
+    const results = reels.map(() => targetSymbol);
+
     checkWinWithBet(results);
 }
+
 
 document.getElementById('spinButton').addEventListener('click', () => {
     spinReels();
