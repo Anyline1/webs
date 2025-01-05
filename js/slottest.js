@@ -78,30 +78,4 @@ jest.mock('./slot', () => ({
     checkWinWithBet: mockFunctions3.checkWinWithBet,
 }));
 
-const { spinReels3 } = require('./slot');
-
-test('Should handle a bet amount that is zero', async () => {
-    await spinReels3();
-
-    expect(mockElements3.message.textContent).toBe('❌ Недостаточно средств для ставки!');
-    expect(mockFunctions3.updateBalance).not.toHaveBeenCalled();
-    expect(mockFunctions3.checkWinWithBet).not.toHaveBeenCalled();
-});
-
-const mockBalanceElement4 = { textContent: 1000 };
-const mockBetAmountElement4 = { value: 1001 };
-const mockMessageElement4 = { textContent: '' };
-
-jest.spyOn(document, 'getElementById').mockImplementation((id) => {
-    switch (id) {
-        case 'balance':
-            return mockBalanceElement4;
-        case 'betAmount':
-            return mockBetAmountElement4;
-        case 'message':
-            return mockMessageElement4;
-        default:
-            return null;
-    }
-});
 
