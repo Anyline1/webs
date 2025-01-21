@@ -38,7 +38,7 @@ body.dark header {
 .container {
     max-width: 1200px;
     margin: 20px auto;
-    padding: 20px;
+    padding: 22px;
     background-color: #ffffff;
     border-radius: 8px;
     transition: background-color 0.3s ease, color 0.3s ease;
