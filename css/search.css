@@ -1,10 +1,10 @@
 .news-search {
     width: 100%;
-    margin: 20px auto;
+    margin: 24px auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
