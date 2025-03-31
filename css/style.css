@@ -17,7 +17,7 @@ body.dark {
 
 body.dark .header-container {
     background-color: #333;
-    border-bottom: 2px solid #555;
+    border-bottom: 4px solid #555;
 }
 
 body.dark .theme-toggle {
