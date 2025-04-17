@@ -17,7 +17,7 @@ h1 {
 .slot-machine {
     display: inline-block;
     margin-top: 50px;
-    padding: 18px;
+    padding: 16px;
     background-color: #222;
     border-radius: 16px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
