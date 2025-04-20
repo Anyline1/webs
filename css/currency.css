@@ -22,7 +22,7 @@
 .weather-info {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
     flex: 1;
     justify-content: center;
 }
