@@ -84,7 +84,7 @@ header {
 .info-block {
     display: flex;
     justify-content: space-between;
-    gap: 15px;
+    gap: 14px;
     margin-bottom: 20px;
 }
 
