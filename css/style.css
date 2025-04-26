@@ -42,7 +42,7 @@ header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 10px 16px;
+    padding: 10px 14px;
     background-color: #d1e9ff;
     border-bottom: 2px solid #bcd4f0;
 }
