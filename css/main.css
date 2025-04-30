@@ -16,7 +16,7 @@
 .weather-info {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .weather-icon {
