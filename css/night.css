@@ -17,7 +17,7 @@ body.dark {
 }
 
 header {
-    padding: 14px 16px;
+    padding: 14px 15px;
     background-color: #ffffff;
     border-bottom: 2px solid #ddd;
     transition: background-color 0.3s ease, color 0.3s ease;
