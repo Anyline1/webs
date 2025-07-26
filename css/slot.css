@@ -156,7 +156,7 @@ h1 {
 
 .paytable th,
 .paytable td {
-    border: 1px solid #ff9900;
+    border: 2px solid #ff9900;
     padding: 10px;
     text-align: center;
 }
